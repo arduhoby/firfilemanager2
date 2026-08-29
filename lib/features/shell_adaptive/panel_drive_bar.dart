@@ -7,6 +7,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../core/storage/models/connection_profile.dart';
 import '../../core/storage/storage_provider.dart';
 import '../../core/storage/storage_provider_service.dart';
+import '../../core/platform/volume_service.dart';
 import '../../core/settings/recent_service.dart';
 import '../connections/connection_repository.dart';
 import '../connections/connection_dialog.dart';
@@ -292,23 +293,34 @@ class _PanelDriveBarState extends ConsumerState<PanelDriveBar> {
                           }
                         }
                       },
-                      onLongPress: !item.isLocal
+                      onLongPress: item.isLocal
                           ? () {
                               final RenderBox box =
                                   context.findRenderObject() as RenderBox;
                               final offset = box.localToGlobal(Offset.zero);
-                              _showDriveContextMenu(context, offset, item);
+                              _showLocalDriveContextMenu(context, offset, item);
                             }
-                          : null,
-                      onSecondaryTapDown: !item.isLocal
+                          : () {
+                              final RenderBox box =
+                                  context.findRenderObject() as RenderBox;
+                              final offset = box.localToGlobal(Offset.zero);
+                              _showDriveContextMenu(context, offset, item);
+                            },
+                      onSecondaryTapDown: item.isLocal
                           ? (details) {
-                              _showDriveContextMenu(
+                              _showLocalDriveContextMenu(
                                 context,
                                 details.globalPosition,
                                 item,
                               );
                             }
-                          : null,
+                          : (details) {
+                              _showDriveContextMenu(
+                                context,
+                                details.globalPosition,
+                                item,
+                              );
+                            },
                       child: Container(
                         width: 44, // reduced from 56 to take up less width
                         padding: const EdgeInsets.symmetric(vertical: 1),
@@ -502,6 +514,55 @@ class _PanelDriveBarState extends ConsumerState<PanelDriveBar> {
             }
           }
         }
+      }),
+    );
+  }
+
+  void _showLocalDriveContextMenu(
+    BuildContext context,
+    Offset globalPosition,
+    _DriveItem item,
+  ) {
+    if (!VolumeService.canEject(item.path)) return;
+
+    unawaited(
+      showMenu<String>(
+        context: context,
+        position: RelativeRect.fromLTRB(
+          globalPosition.dx,
+          globalPosition.dy,
+          globalPosition.dx + 1,
+          globalPosition.dy + 1,
+        ),
+        items: const [
+          PopupMenuItem(
+            value: 'eject',
+            child: Row(
+              children: [
+                Icon(Icons.eject, size: 18),
+                SizedBox(width: 8),
+                Text('Eject / Unmount'),
+              ],
+            ),
+          ),
+        ],
+      ).then((value) async {
+        if (value != 'eject' || !context.mounted) return;
+        final result = await VolumeService.eject(item.path);
+        if (!context.mounted) return;
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              result.ok
+                  ? '${item.name} çıkarıldı.'
+                  : 'Çıkarma başarısız: ${result.message}',
+            ),
+            backgroundColor: result.ok
+                ? null
+                : Theme.of(context).colorScheme.error,
+          ),
+        );
+        if (result.ok) await _loadLocalDrives();
       }),
     );
   }
