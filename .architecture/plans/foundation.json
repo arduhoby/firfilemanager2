@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "id": "v2-foundation",
+  "description": "Create V2 guard, command and operation contracts without replacing legacy entry points.",
+  "baselineRef": "e4df2c6",
+  "allowedPaths": [
+    ".architecture/",
+    "tool/architecture_guard.dart",
+    "lib/core/commands/",
+    "lib/core/operations/",
+    "lib/features/context_menu/",
+    "lib/features/operations_v2/",
+    "lib/features/panels_v2/",
+    "lib/features/settings_v2/",
+    "test/core/commands/",
+    "test/core/operations/"
+  ],
+  "protectedResponsibilityIds": [
+    "terminal-open-local-mounted",
+    "hidden-entry-transfer",
+    "multi-panel-transfer",
+    "single-target-drag-drop",
+    "utf8-source",
+    "single-completion-sound"
+  ],
+  "verificationCommands": [
+    "flutter test test/core/commands test/core/operations"
+  ]
+}

@@ -1,0 +1,319 @@
+{
+  "@@locale": "tr",
+  "appTitle": "Fir Dosya Yöneticisi",
+
+  "navLocal": "Yerel",
+  "navConnections": "Bağlantılar",
+  "navServer": "Sunucu",
+  "navSettings": "Ayarlar",
+
+  "categoryImages": "Görüntüler",
+  "categoryDocuments": "Belgeler",
+  "categoryAudio": "Ses",
+  "categoryVideo": "Video",
+  "categoryDownloads": "İndirilenler",
+  "categoryMainStorage": "Ana Bellek",
+
+  "actionCopy": "Kopyala",
+  "actionMove": "Taşı",
+  "actionDelete": "Sil",
+  "actionRename": "Yeniden Adlandır",
+  "actionNewFolder": "Yeni Klasör",
+  "actionPaste": "Yapıştır",
+  "actionSelectAll": "Tümünü Seç",
+  "actionRefresh": "Yenile",
+  "actionOpen": "Aç",
+  "actionOpenDefault": "Varsayılan Uygulamayla Aç",
+  "actionOpenWith": "Şununla Aç",
+  "actionChooseApplication": "Uygulama Seç…",
+  "actionProperties": "Özellikler",
+  "actionRevealInFinder": "Finder'da Göster",
+  "actionCompress": "Sıkıştır",
+  "actionCompressZip": "ZIP olarak sıkıştır",
+  "actionCompressTar": "TAR olarak sıkıştır",
+  "actionCompressTarGz": "TAR.GZ olarak sıkıştır",
+  "actionExtract": "Buraya Çıkar",
+  "actionExtractTo": "Çıkar…",
+  "actionClose": "Kapat",
+  "actionCancel": "İptal",
+  "actionRetry": "Tekrar Dene",
+  "actionSave": "Kaydet",
+  "actionConnect": "Bağlan",
+  "actionDisconnect": "Bağlantıyı Kes",
+  "actionAdd": "Ekle",
+  "actionEdit": "Düzenle",
+  "actionRemove": "Kaldır",
+
+  "sortByName": "İsim",
+  "sortByDate": "Değiştirilme Tarihi",
+  "sortBySize": "Boyut",
+  "sortByType": "Tür",
+  "sortAscending": "Artan",
+  "sortDescending": "Azalan",
+
+  "panelLeft": "Sol Panel",
+  "panelRight": "Sağ Panel",
+  "panelActive": "Aktif Panel",
+
+  "operationCopying": "{count} öğe kopyalanıyor…",
+  "@operationCopying": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+  "operationMoving": "{count} öğe taşınıyor…",
+  "@operationMoving": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+  "operationDeleting": "{count} öğe siliniyor…",
+  "@operationDeleting": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+  "operationComplete": "İşlem tamamlandı",
+  "operationFailed": "İşlem başarısız: {error}",
+  "@operationFailed": {
+    "placeholders": {
+      "error": { "type": "String" }
+    }
+  },
+  "operationProgress": "{current} / {total}",
+  "@operationProgress": {
+    "placeholders": {
+      "current": { "type": "int" },
+      "total": { "type": "int" }
+    }
+  },
+
+  "connectionTypeSftp": "SFTP",
+  "connectionTypeFtp": "FTP",
+  "connectionTypeWebdav": "WebDAV",
+  "connectionTypeSmb": "SMB",
+  "connectionTypeGdrive": "Google Drive",
+  "connectionTypeDropbox": "Dropbox",
+
+  "connectionHost": "Sunucu",
+  "connectionPort": "Port",
+  "connectionUsername": "Kullanıcı Adı",
+  "connectionPassword": "Şifre",
+  "connectionName": "Bağlantı Adı",
+  "connectionAuthMethod": "Kimlik Doğrulama Yöntemi",
+  "connectionAuthPassword": "Şifre",
+  "connectionAuthKey": "Özel Anahtar",
+  "connectionAddNew": "Yeni Bağlantı Ekle",
+  "connectionEdit": "Bağlantıyı Düzenle",
+  "connectionTest": "Bağlantıyı Test Et",
+  "connectionTestSuccess": "Bağlantı başarılı",
+  "connectionTestFailed": "Bağlantı başarısız: {error}",
+  "@connectionTestFailed": {
+    "placeholders": {
+      "error": { "type": "String" }
+    }
+  },
+  "connectionDisconnected": "Bağlantı kesildi",
+  "connectionReconnecting": "Yeniden bağlanılıyor…",
+
+  "serverStart": "Sunucuyu Başlat",
+  "serverStop": "Sunucuyu Durdur",
+  "serverRunning": "Sunucu çalışıyor",
+  "serverStopped": "Sunucu durduruldu",
+  "serverSharedFolder": "Paylaşılan Klasör",
+  "serverPort": "Port",
+  "serverUsername": "Kullanıcı Adı",
+  "serverPassword": "Şifre",
+  "serverActiveConnections": "Aktif Bağlantılar",
+  "serverNoConnections": "Aktif bağlantı yok",
+  "serverFtp": "FTP Sunucusu",
+  "serverWebdav": "WebDAV Sunucusu",
+
+  "settingsLanguage": "Dil",
+  "settingsTheme": "Tema",
+  "settingsThemeLight": "Açık",
+  "settingsThemeDark": "Koyu",
+  "settingsThemeSystem": "Sistem",
+
+  "errorAccessDenied": "Erişim reddedildi",
+  "errorNotFound": "Bulunamadı: {path}",
+  "@errorNotFound": {
+    "placeholders": {
+      "path": { "type": "String" }
+    }
+  },
+  "errorAlreadyExists": "Zaten mevcut: {path}",
+  "@errorAlreadyExists": {
+    "placeholders": {
+      "path": { "type": "String" }
+    }
+  },
+  "errorNetwork": "Ağ hatası: {error}",
+  "@errorNetwork": {
+    "placeholders": {
+      "error": { "type": "String" }
+    }
+  },
+  "errorTimeout": "İşlem zaman aşımına uğradı",
+  "errorUnknown": "Bilinmeyen bir hata oluştu",
+
+  "confirmDeleteTitle": "Sil",
+  "confirmDeleteMessage": "{count} öğeyi silmek istediğinize emin misiniz?",
+  "@confirmDeleteMessage": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+  "confirmOverwriteTitle": "Üzerine Yaz",
+  "confirmOverwriteMessage": "{name} zaten mevcut. Üzerine yazılsın mı?",
+  "@confirmOverwriteMessage": {
+    "placeholders": {
+      "name": { "type": "String" }
+    }
+  },
+
+  "propertiesName": "İsim",
+  "propertiesPath": "Yol",
+  "propertiesSize": "Boyut",
+  "propertiesType": "Tür",
+  "propertiesModified": "Değiştirilme Tarihi",
+  "propertiesPermissions": "İzinler",
+  "propertiesFolder": "Klasör",
+  "propertiesFile": "Dosya",
+
+  "itemsSelected": "{count} seçili",
+  "@itemsSelected": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+  "itemsCount": "{count} öğe",
+  "@itemsCount": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+  "emptyFolder": "Bu klasör boş",
+  "progressCurrentFile": "Geçerli dosya",
+  "progressOverall": "Toplam",
+  "progressRemaining": "{size} kaldı",
+  "progressSpeed": "{speed}/sn",
+  "progressEta": "ETA {time}",
+  "progressEtaCalculating": "ETA hesaplanıyor…",
+  "syncPreviewTitle": "Akıllı Senkronizasyon",
+  "syncSourcePanel": "Seçili panel",
+  "syncDestinationPanel": "Hedef panel",
+  "syncSelectedSummary": "{total} dosyanın {selected} tanesi seçili",
+  "syncSelectChanges": "Farklıları seç",
+  "syncSelectAll": "Tümünü seç",
+  "syncClearAll": "Tümünü temizle",
+  "syncStartSelected": "Senkronize et ({count})",
+  "syncColumnFile": "Dosya",
+  "syncColumnSize": "Boyut",
+  "syncColumnModified": "Değiştirilme",
+  "syncColumnStatus": "Karşılaştırma",
+  "syncStatusNew": "Yeni",
+  "syncStatusDifferent": "Farklı",
+  "syncStatusEqual": "Eş",
+  "syncMissingDestination": "Hedefte yok",
+  "syncNoChanges": "Fark bulunamadı. Hedef panel seçili panelle zaten eşleşiyor.",
+  "syncResultSummary": "Senkronizasyon tamamlandı: {updated} dosya yenisiyle değiştirildi, {created} yeni dosya kopyalandı.",
+  "syncResultFailures": "Senkronizasyon bitti: {updated} dosya yenisiyle değiştirildi, {created} yeni dosya kopyalandı, {failed} dosya başarısız oldu.",
+  "syncCancelled": "Senkronizasyon iptal edildi.",
+  "syncStatusInaccessible": "Erişilemiyor",
+  "syncShowSelectedOnly": "Yalnız seçilenler",
+  "syncSearchHint": "Dosyalarda ara",
+  "syncSaveJob": "Görevi kaydet…",
+  "syncEditJob": "Senkron görevini düzenle",
+  "syncJobName": "Görev adı",
+  "syncJobNameRequired": "Bir görev adı girin.",
+  "syncWeekdayRequired": "En az bir gün seçin.",
+  "syncSchedule": "Zamanlama",
+  "syncScheduleManual": "Manuel",
+  "syncScheduleOnce": "Bir kez",
+  "syncScheduleDaily": "Her gün",
+  "syncScheduleWeekly": "Her hafta",
+  "syncJobEnabled": "Otomasyon etkin",
+  "syncRequireWifi": "Yalnız Wi-Fi ile çalıştır",
+  "syncAllowMobileData": "Mobil veriye izin ver",
+  "syncRequireCharging": "Yalnız şarj olurken çalıştır",
+  "weekdayMonday": "Pzt",
+  "weekdayTuesday": "Sal",
+  "weekdayWednesday": "Çar",
+  "weekdayThursday": "Per",
+  "weekdayFriday": "Cum",
+  "weekdaySaturday": "Cmt",
+  "weekdaySunday": "Paz",
+  "syncJobSaved": "\"{name}\" kaydedildi.",
+  "syncJobNameConflict": "\"{name}\" adlı bir görev zaten var.",
+  "syncJobsTitle": "Fir SmartSync",
+  "syncJobsSubtitle": "Kayıtlı senkron görevleri",
+  "syncJobsEmpty": "Henüz bir senkron görevi kaydedilmedi.",
+  "syncJobsEmptyHint": "Bir dosya panelinden senkronizasyonu açın, dosyaları seçin ve Görevi kaydet seçeneğini kullanın.",
+  "syncRunSucceeded": "Senkronizasyon tamamlandı: {updated} güncellendi, {created} oluşturuldu.",
+  "syncRunFailed": "{failed} dosyanın senkronizasyonu başarısız oldu.",
+  "syncDeleteJob": "Senkron görevini sil",
+  "syncDeleteJobConfirm": "\"{name}\" görevi ve zamanlaması silinsin mi?",
+  "syncHistoryFor": "{name} geçmişi",
+  "syncHistoryEmpty": "Henüz bir çalışma kaydedilmedi.",
+  "syncFailedLabel": "Başarısız",
+  "syncFailureDetails": "Hata ayrıntıları",
+  "syncRunNow": "Şimdi çalıştır",
+  "syncHistory": "Geçmiş",
+  "panelAdd": "Panel ekle",
+  "panelClose": "Paneli kapat",
+  "panelNumber": "Panel {number}",
+  "@panelNumber": {
+    "placeholders": { "number": { "type": "int" } }
+  },
+  "targetPanels": "Hedef paneller",
+  "targetSourcePanel": "Kaynak panel",
+  "targetOperationSync": "Senkron",
+  "targetSelectedSummary": "{total} hedeften {selected} tanesi seçili",
+  "@targetSelectedSummary": {
+    "placeholders": {
+      "selected": { "type": "int" },
+      "total": { "type": "int" }
+    }
+  },
+  "targetSameLocation": "Kaynak panelle aynı konum",
+  "targetConnectionUnavailable": "Bağlantı kullanılamıyor",
+  "targetLocalPanelRequired": "Sıkıştırma için yerel bir hedef panel seçin",
+  "targetContinue": "Devam et",
+  "multiTransferResultTitle": "Aktarım sonuçları",
+  "multiTransferSuccess": "Aktarım {count} hedef panel için tamamlandı",
+  "@multiTransferSuccess": {
+    "placeholders": { "count": { "type": "int" } }
+  },
+  "multiTransferPartial": "{total} hedef panelden {successful} tanesi başarıyla tamamlandı",
+  "@multiTransferPartial": {
+    "placeholders": {
+      "successful": { "type": "int" },
+      "total": { "type": "int" }
+    }
+  },
+  "multiTransferCompleted": "Tamamlandı",
+  "multiTransferFailed": "Başarısız",
+  "multiTransferCancelled": "İptal edildi",
+  "multiTransferSkipped": "Başlatılmadı",
+  "multiTransferSourcePreserved": "Bütün hedefler başarıyla tamamlanmadığı için kaynak korundu.",
+  "multiArchiveResultTitle": "Sıkıştırma sonuçları",
+  "multiArchiveSuccess": "Arşiv {count} hedef panelde oluşturuldu",
+  "@multiArchiveSuccess": {
+    "placeholders": { "count": { "type": "int" } }
+  },
+  "archiveLocalSourceRequired": "Sıkıştırma şu anda yalnızca yerel paneldeki dosyaları destekliyor.",
+  "multiSyncResultTitle": "Senkron sonuçları",
+  "multiSyncSummary": "{total} hedef panelden {successful} tanesi başarıyla tamamlandı",
+  "@multiSyncSummary": {
+    "placeholders": {
+      "successful": { "type": "int" },
+      "total": { "type": "int" }
+    }
+  },
+  "multiSyncCompleted": "Senkron tamamlandı",
+  "multiSyncNoChanges": "Zaten güncel",
+  "multiSyncFailed": "Senkron başarısız",
+  "multiSyncCancelled": "Senkron iptal edildi",
+  "multiSyncSkipped": "Başlatılmadı"
+}

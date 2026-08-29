@@ -1,0 +1,500 @@
+{
+  "@@locale": "en",
+  "appTitle": "Fir File Manager",
+  "@appTitle": {
+    "description": "Application title"
+  },
+
+  "navLocal": "Local",
+  "@navLocal": {},
+  "navConnections": "Connections",
+  "@navConnections": {},
+  "navServer": "Server",
+  "@navServer": {},
+  "navSettings": "Settings",
+  "@navSettings": {},
+
+  "categoryImages": "Images",
+  "@categoryImages": {},
+  "categoryDocuments": "Documents",
+  "@categoryDocuments": {},
+  "categoryAudio": "Audio",
+  "@categoryAudio": {},
+  "categoryVideo": "Video",
+  "@categoryVideo": {},
+  "categoryDownloads": "Downloads",
+  "@categoryDownloads": {},
+  "categoryMainStorage": "Main Storage",
+  "@categoryMainStorage": {},
+
+  "actionCopy": "Copy",
+  "@actionCopy": {},
+  "actionMove": "Move",
+  "@actionMove": {},
+  "actionDelete": "Delete",
+  "@actionDelete": {},
+  "actionRename": "Rename",
+  "@actionRename": {},
+  "actionNewFolder": "New Folder",
+  "@actionNewFolder": {},
+  "actionPaste": "Paste",
+  "@actionPaste": {},
+  "actionSelectAll": "Select All",
+  "@actionSelectAll": {},
+  "actionRefresh": "Refresh",
+  "@actionRefresh": {},
+  "actionOpen": "Open",
+  "@actionOpen": {},
+  "actionOpenDefault": "Open with Default Application",
+  "@actionOpenDefault": {},
+  "actionOpenWith": "Open With",
+  "@actionOpenWith": {},
+  "actionChooseApplication": "Choose Application…",
+  "@actionChooseApplication": {},
+  "actionProperties": "Properties",
+  "@actionProperties": {},
+  "actionRevealInFinder": "Reveal in Finder",
+  "@actionRevealInFinder": {},
+  "actionCompress": "Compress",
+  "@actionCompress": {},
+  "actionCompressZip": "Compress to ZIP",
+  "@actionCompressZip": {},
+  "actionCompressTar": "Compress to TAR",
+  "@actionCompressTar": {},
+  "actionCompressTarGz": "Compress to TAR.GZ",
+  "@actionCompressTarGz": {},
+  "actionExtract": "Extract Here",
+  "@actionExtract": {},
+  "actionExtractTo": "Extract to…",
+  "@actionExtractTo": {},
+  "actionClose": "Close",
+  "@actionClose": {},
+  "actionCancel": "Cancel",
+  "@actionCancel": {},
+  "actionRetry": "Retry",
+  "@actionRetry": {},
+  "actionSave": "Save",
+  "@actionSave": {},
+  "actionConnect": "Connect",
+  "@actionConnect": {},
+  "actionDisconnect": "Disconnect",
+  "@actionDisconnect": {},
+  "actionAdd": "Add",
+  "@actionAdd": {},
+  "actionEdit": "Edit",
+  "@actionEdit": {},
+  "actionRemove": "Remove",
+  "@actionRemove": {},
+
+  "sortByName": "Name",
+  "@sortByName": {},
+  "sortByDate": "Date Modified",
+  "@sortByDate": {},
+  "sortBySize": "Size",
+  "@sortBySize": {},
+  "sortByType": "Type",
+  "@sortByType": {},
+  "sortAscending": "Ascending",
+  "@sortAscending": {},
+  "sortDescending": "Descending",
+  "@sortDescending": {},
+
+  "panelLeft": "Left Panel",
+  "@panelLeft": {},
+  "panelRight": "Right Panel",
+  "@panelRight": {},
+  "panelActive": "Active Panel",
+  "@panelActive": {},
+
+  "operationCopying": "Copying {count} items…",
+  "@operationCopying": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+  "operationMoving": "Moving {count} items…",
+  "@operationMoving": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+  "operationDeleting": "Deleting {count} items…",
+  "@operationDeleting": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+  "operationComplete": "Operation complete",
+  "@operationComplete": {},
+  "operationFailed": "Operation failed: {error}",
+  "@operationFailed": {
+    "placeholders": {
+      "error": { "type": "String" }
+    }
+  },
+  "operationProgress": "{current} / {total}",
+  "@operationProgress": {
+    "placeholders": {
+      "current": { "type": "int" },
+      "total": { "type": "int" }
+    }
+  },
+
+  "connectionTypeSftp": "SFTP",
+  "@connectionTypeSftp": {},
+  "connectionTypeFtp": "FTP",
+  "@connectionTypeFtp": {},
+  "connectionTypeWebdav": "WebDAV",
+  "@connectionTypeWebdav": {},
+  "connectionTypeSmb": "SMB",
+  "@connectionTypeSmb": {},
+  "connectionTypeGdrive": "Google Drive",
+  "@connectionTypeGdrive": {},
+  "connectionTypeDropbox": "Dropbox",
+  "@connectionTypeDropbox": {},
+
+  "connectionHost": "Host",
+  "@connectionHost": {},
+  "connectionPort": "Port",
+  "@connectionPort": {},
+  "connectionUsername": "Username",
+  "@connectionUsername": {},
+  "connectionPassword": "Password",
+  "@connectionPassword": {},
+  "connectionName": "Connection Name",
+  "@connectionName": {},
+  "connectionAuthMethod": "Authentication Method",
+  "@connectionAuthMethod": {},
+  "connectionAuthPassword": "Password",
+  "@connectionAuthPassword": {},
+  "connectionAuthKey": "Private Key",
+  "@connectionAuthKey": {},
+  "connectionAddNew": "Add New Connection",
+  "@connectionAddNew": {},
+  "connectionEdit": "Edit Connection",
+  "@connectionEdit": {},
+  "connectionTest": "Test Connection",
+  "@connectionTest": {},
+  "connectionTestSuccess": "Connection successful",
+  "@connectionTestSuccess": {},
+  "connectionTestFailed": "Connection failed: {error}",
+  "@connectionTestFailed": {
+    "placeholders": {
+      "error": { "type": "String" }
+    }
+  },
+  "connectionDisconnected": "Disconnected",
+  "@connectionDisconnected": {},
+  "connectionReconnecting": "Reconnecting…",
+  "@connectionReconnecting": {},
+
+  "serverStart": "Start Server",
+  "@serverStart": {},
+  "serverStop": "Stop Server",
+  "@serverStop": {},
+  "serverRunning": "Server is running",
+  "@serverRunning": {},
+  "serverStopped": "Server is stopped",
+  "@serverStopped": {},
+  "serverSharedFolder": "Shared Folder",
+  "@serverSharedFolder": {},
+  "serverPort": "Port",
+  "@serverPort": {},
+  "serverUsername": "Username",
+  "@serverUsername": {},
+  "serverPassword": "Password",
+  "@serverPassword": {},
+  "serverActiveConnections": "Active Connections",
+  "@serverActiveConnections": {},
+  "serverNoConnections": "No active connections",
+  "@serverNoConnections": {},
+  "serverFtp": "FTP Server",
+  "@serverFtp": {},
+  "serverWebdav": "WebDAV Server",
+  "@serverWebdav": {},
+
+  "settingsLanguage": "Language",
+  "@settingsLanguage": {},
+  "settingsTheme": "Theme",
+  "@settingsTheme": {},
+  "settingsThemeLight": "Light",
+  "@settingsThemeLight": {},
+  "settingsThemeDark": "Dark",
+  "@settingsThemeDark": {},
+  "settingsThemeSystem": "System",
+  "@settingsThemeSystem": {},
+
+  "errorAccessDenied": "Access denied",
+  "@errorAccessDenied": {},
+  "errorNotFound": "Not found: {path}",
+  "@errorNotFound": {
+    "placeholders": {
+      "path": { "type": "String" }
+    }
+  },
+  "errorAlreadyExists": "Already exists: {path}",
+  "@errorAlreadyExists": {
+    "placeholders": {
+      "path": { "type": "String" }
+    }
+  },
+  "errorNetwork": "Network error: {error}",
+  "@errorNetwork": {
+    "placeholders": {
+      "error": { "type": "String" }
+    }
+  },
+  "errorTimeout": "Operation timed out",
+  "@errorTimeout": {},
+  "errorUnknown": "An unknown error occurred",
+  "@errorUnknown": {},
+
+  "confirmDeleteTitle": "Delete",
+  "@confirmDeleteTitle": {},
+  "confirmDeleteMessage": "Are you sure you want to delete {count} item(s)?",
+  "@confirmDeleteMessage": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+  "confirmOverwriteTitle": "Overwrite",
+  "@confirmOverwriteTitle": {},
+  "confirmOverwriteMessage": "{name} already exists. Overwrite?",
+  "@confirmOverwriteMessage": {
+    "placeholders": {
+      "name": { "type": "String" }
+    }
+  },
+
+  "propertiesName": "Name",
+  "@propertiesName": {},
+  "propertiesPath": "Path",
+  "@propertiesPath": {},
+  "propertiesSize": "Size",
+  "@propertiesSize": {},
+  "propertiesType": "Type",
+  "@propertiesType": {},
+  "propertiesModified": "Date Modified",
+  "@propertiesModified": {},
+  "propertiesPermissions": "Permissions",
+  "@propertiesPermissions": {},
+  "propertiesFolder": "Folder",
+  "@propertiesFolder": {},
+  "propertiesFile": "File",
+  "@propertiesFile": {},
+
+  "itemsSelected": "{count} selected",
+  "@itemsSelected": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+  "itemsCount": "{count} items",
+  "@itemsCount": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+  "emptyFolder": "This folder is empty",
+  "@emptyFolder": {},
+  "progressCurrentFile": "Current file",
+  "@progressCurrentFile": {},
+  "progressOverall": "Overall",
+  "@progressOverall": {},
+  "progressRemaining": "{size} remaining",
+  "@progressRemaining": {
+    "placeholders": {
+      "size": { "type": "String" }
+    }
+  },
+  "progressSpeed": "{speed}/s",
+  "@progressSpeed": {
+    "placeholders": {
+      "speed": { "type": "String" }
+    }
+  },
+  "progressEta": "ETA {time}",
+  "@progressEta": {
+    "placeholders": {
+      "time": { "type": "String" }
+    }
+  },
+  "progressEtaCalculating": "Calculating ETA…",
+  "@progressEtaCalculating": {},
+  "syncPreviewTitle": "Smart Synchronization",
+  "@syncPreviewTitle": {},
+  "syncSourcePanel": "Selected panel",
+  "@syncSourcePanel": {},
+  "syncDestinationPanel": "Destination panel",
+  "@syncDestinationPanel": {},
+  "syncSelectedSummary": "{selected} of {total} files selected",
+  "@syncSelectedSummary": {
+    "placeholders": {
+      "selected": { "type": "int" },
+      "total": { "type": "int" }
+    }
+  },
+  "syncSelectChanges": "Select differences",
+  "@syncSelectChanges": {},
+  "syncSelectAll": "Select all",
+  "@syncSelectAll": {},
+  "syncClearAll": "Clear all",
+  "@syncClearAll": {},
+  "syncStartSelected": "Synchronize ({count})",
+  "@syncStartSelected": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+  "syncColumnFile": "File",
+  "@syncColumnFile": {},
+  "syncColumnSize": "Size",
+  "@syncColumnSize": {},
+  "syncColumnModified": "Modified",
+  "@syncColumnModified": {},
+  "syncColumnStatus": "Comparison",
+  "@syncColumnStatus": {},
+  "syncStatusNew": "New",
+  "@syncStatusNew": {},
+  "syncStatusDifferent": "Different",
+  "@syncStatusDifferent": {},
+  "syncStatusEqual": "Equal",
+  "@syncStatusEqual": {},
+  "syncMissingDestination": "Not present",
+  "@syncMissingDestination": {},
+  "syncNoChanges": "No differences found. The destination already matches the selected panel.",
+  "@syncNoChanges": {},
+  "syncResultSummary": "Synchronization completed: {updated} files replaced and {created} new files copied.",
+  "@syncResultSummary": {
+    "placeholders": {
+      "updated": { "type": "int" },
+      "created": { "type": "int" }
+    }
+  },
+  "syncResultFailures": "Synchronization finished: {updated} files replaced, {created} new files copied, {failed} failed.",
+  "@syncResultFailures": {
+    "placeholders": {
+      "updated": { "type": "int" },
+      "created": { "type": "int" },
+      "failed": { "type": "int" }
+    }
+  },
+  "syncCancelled": "Synchronization cancelled.",
+  "syncStatusInaccessible": "Inaccessible",
+  "syncShowSelectedOnly": "Selected only",
+  "syncSearchHint": "Search files",
+  "syncSaveJob": "Save task…",
+  "syncEditJob": "Edit synchronization task",
+  "syncJobName": "Task name",
+  "syncJobNameRequired": "Enter a task name.",
+  "syncWeekdayRequired": "Select at least one weekday.",
+  "syncSchedule": "Schedule",
+  "syncScheduleManual": "Manual",
+  "syncScheduleOnce": "Once",
+  "syncScheduleDaily": "Every day",
+  "syncScheduleWeekly": "Every week",
+  "syncJobEnabled": "Automation enabled",
+  "syncRequireWifi": "Run only on Wi-Fi",
+  "syncAllowMobileData": "Allow mobile data",
+  "syncRequireCharging": "Run only while charging",
+  "weekdayMonday": "Mon",
+  "weekdayTuesday": "Tue",
+  "weekdayWednesday": "Wed",
+  "weekdayThursday": "Thu",
+  "weekdayFriday": "Fri",
+  "weekdaySaturday": "Sat",
+  "weekdaySunday": "Sun",
+  "syncJobSaved": "\"{name}\" was saved.",
+  "@syncJobSaved": {
+    "placeholders": { "name": { "type": "String" } }
+  },
+  "syncJobNameConflict": "A task named \"{name}\" already exists.",
+  "@syncJobNameConflict": {
+    "placeholders": { "name": { "type": "String" } }
+  },
+  "syncJobsTitle": "Fir SmartSync",
+  "syncJobsSubtitle": "Saved synchronization tasks",
+  "syncJobsEmpty": "No synchronization tasks have been saved.",
+  "syncJobsEmptyHint": "Open synchronization from a file panel, choose the files, then select Save task.",
+  "syncRunSucceeded": "Synchronization completed: {updated} updated, {created} created.",
+  "@syncRunSucceeded": {
+    "placeholders": {
+      "updated": { "type": "int" },
+      "created": { "type": "int" }
+    }
+  },
+  "syncRunFailed": "Synchronization failed for {failed} files.",
+  "@syncRunFailed": {
+    "placeholders": { "failed": { "type": "int" } }
+  },
+  "syncDeleteJob": "Delete synchronization task",
+  "syncDeleteJobConfirm": "Delete \"{name}\" and its schedule?",
+  "@syncDeleteJobConfirm": {
+    "placeholders": { "name": { "type": "String" } }
+  },
+  "syncHistoryFor": "{name} history",
+  "@syncHistoryFor": {
+    "placeholders": { "name": { "type": "String" } }
+  },
+  "syncHistoryEmpty": "No runs have been recorded.",
+  "syncFailedLabel": "Failed",
+  "syncFailureDetails": "Failure details",
+  "syncRunNow": "Run now",
+  "syncHistory": "History",
+  "panelAdd": "Add panel",
+  "panelClose": "Close panel",
+  "panelNumber": "Panel {number}",
+  "@panelNumber": {
+    "placeholders": { "number": { "type": "int" } }
+  },
+  "targetPanels": "Target panels",
+  "targetSourcePanel": "Source panel",
+  "targetOperationSync": "Sync",
+  "targetSelectedSummary": "{selected} of {total} selected",
+  "@targetSelectedSummary": {
+    "placeholders": {
+      "selected": { "type": "int" },
+      "total": { "type": "int" }
+    }
+  },
+  "targetSameLocation": "Same location as the source panel",
+  "targetConnectionUnavailable": "Connection is unavailable",
+  "targetLocalPanelRequired": "Select a local destination panel for compression",
+  "targetContinue": "Continue",
+  "multiTransferResultTitle": "Transfer results",
+  "multiTransferSuccess": "Transfer completed for {count} target panels",
+  "@multiTransferSuccess": {
+    "placeholders": { "count": { "type": "int" } }
+  },
+  "multiTransferPartial": "{successful} of {total} target panels completed successfully",
+  "@multiTransferPartial": {
+    "placeholders": {
+      "successful": { "type": "int" },
+      "total": { "type": "int" }
+    }
+  },
+  "multiTransferCompleted": "Completed",
+  "multiTransferFailed": "Failed",
+  "multiTransferCancelled": "Cancelled",
+  "multiTransferSkipped": "Not started",
+  "multiTransferSourcePreserved": "The source was preserved because not every target completed successfully.",
+  "multiArchiveResultTitle": "Compression results",
+  "multiArchiveSuccess": "Archive created in {count} target panels",
+  "@multiArchiveSuccess": {
+    "placeholders": { "count": { "type": "int" } }
+  },
+  "archiveLocalSourceRequired": "Compression currently supports files from local panels only.",
+  "multiSyncResultTitle": "Synchronization results",
+  "multiSyncSummary": "{successful} of {total} target panels completed successfully",
+  "@multiSyncSummary": {
+    "placeholders": {
+      "successful": { "type": "int" },
+      "total": { "type": "int" }
+    }
+  },
+  "multiSyncCompleted": "Synchronization completed",
+  "multiSyncNoChanges": "Already up to date",
+  "multiSyncFailed": "Synchronization failed",
+  "multiSyncCancelled": "Synchronization cancelled",
+  "multiSyncSkipped": "Not started"
+}

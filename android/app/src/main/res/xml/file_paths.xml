@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<paths xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- The file manager can edit user-selected files from any mounted root. -->
+    <root-path name="root" path="." />
+    <files-path name="internal_files" path="." />
+    <cache-path name="internal_cache" path="." />
+    <external-files-path name="external_files" path="." />
+    <external-cache-path name="external_cache" path="." />
+</paths>

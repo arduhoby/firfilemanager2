@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "id": "context-menu-migration",
+  "description": "Route FilePanel context-menu actions through the V2 command registry and orchestrator while retaining legacy services as adapters.",
+  "baselineRef": "af94b4d",
+  "allowedPaths": [
+    ".architecture/",
+    "lib/core/commands/",
+    "lib/features/context_menu/",
+    "lib/features/shell_adaptive/file_panel.dart",
+    "test/core/commands/",
+    "test/features/context_menu/"
+  ],
+  "protectedResponsibilityIds": [
+    "terminal-open-local-mounted",
+    "hidden-entry-transfer",
+    "multi-panel-transfer",
+    "single-target-drag-drop",
+    "utf8-source",
+    "single-completion-sound"
+  ],
+  "verificationCommands": [
+    "flutter test test/core/commands test/features/context_menu"
+  ]
+}

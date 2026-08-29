@@ -1,0 +1,72 @@
+{
+  "schemaVersion": 1,
+  "responsibilities": [
+    {
+      "id": "terminal-open-local-mounted",
+      "description": "Terminal command remains available for local and mounted paths only.",
+      "protectedFiles": [
+        "lib/features/file_operations/file_open_service.dart",
+        "test/features/file_operations/file_open_service_test.dart"
+      ],
+      "verificationCommands": [
+        "flutter test test/features/file_operations/file_open_service_test.dart"
+      ]
+    },
+    {
+      "id": "hidden-entry-transfer",
+      "description": "Hidden entries, including .git, remain part of file operations.",
+      "protectedFiles": [
+        "lib/core/storage/hidden_entry_policy.dart",
+        "test/core/storage/hidden_entry_policy_test.dart"
+      ],
+      "verificationCommands": [
+        "flutter test test/core/storage/hidden_entry_policy_test.dart"
+      ]
+    },
+    {
+      "id": "multi-panel-transfer",
+      "description": "Transfer, compression and sync reuse shared target policies.",
+      "protectedFiles": [
+        "lib/features/file_operations/panel_target_selection.dart",
+        "lib/features/file_operations/multi_panel_transfer_coordinator.dart",
+        "lib/features/file_operations/multi_panel_sync_coordinator.dart"
+      ],
+      "verificationCommands": [
+        "flutter test test/features/file_operations/final_multi_panel_acceptance_test.dart"
+      ]
+    },
+    {
+      "id": "single-target-drag-drop",
+      "description": "Drag and drop remains a single-source, single-target operation.",
+      "protectedFiles": [
+        "lib/features/file_operations/panel_drag_policy.dart"
+      ],
+      "verificationCommands": [
+        "flutter test test/features/file_operations/final_multi_panel_acceptance_test.dart"
+      ]
+    },
+    {
+      "id": "utf8-source",
+      "description": "Source and localization files remain valid UTF-8.",
+      "protectedFiles": [
+        ".editorconfig",
+        ".gitattributes",
+        "test/quality/utf8_source_guard_test.dart"
+      ],
+      "verificationCommands": [
+        "flutter test test/quality/utf8_source_guard_test.dart"
+      ]
+    },
+    {
+      "id": "single-completion-sound",
+      "description": "A completed batch produces one setting-controlled sound.",
+      "protectedFiles": [
+        "lib/features/file_operations/operation_completion_sound_policy.dart"
+      ],
+      "verificationCommands": [
+        "flutter test test/features/file_operations/operation_completion_sound_policy_test.dart"
+      ]
+    }
+  ]
+}
+
