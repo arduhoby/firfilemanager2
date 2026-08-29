@@ -24,7 +24,9 @@ dependencies:
   flutter_secure_storage: ^9.2.2
 
   # Network protocols — clients
-  dartssh2: ^2.3.0
+  # 2.15+ replaces the legacy crypto dependency that is incompatible with
+  # current Dart SDK typed-data APIs, while retaining the existing SFTP API.
+  dartssh2: ^2.22.5
   ftpconnect: ^2.0.8
   webdav_client: ^1.2.2
   dio: ^5.10.0
@@ -83,6 +85,12 @@ dev_dependencies:
 
   # Linting
   flutter_lints: ^6.0.0
+
+# dartssh2 2.15+ requires PointyCastle 4 for current Dart SDK support.
+# smb_connect 0.0.9 still declares the older 3.x constraint, although the
+# crypto APIs it uses remain source-compatible with PointyCastle 4.
+dependency_overrides:
+  pointycastle: ^4.0.0
 
 flutter:
   uses-material-design: true

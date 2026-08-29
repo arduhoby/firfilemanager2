@@ -1,11 +1,8 @@
 import 'dart:async';
-import 'dart:convert';
-import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:dartssh2/dartssh2.dart';
 import 'package:path/path.dart' as p;
-import 'package:path/path.dart';
 
 import '../models/connection_profile.dart';
 import '../models/file_entry.dart';
@@ -91,7 +88,7 @@ class SftpProvider implements StorageProvider {
   Future<void> disconnect() async {
     _isConnected = false;
     try {
-      _sftp?.close();
+      await _sftp?.close();
       _client?.close();
     } catch (_) {
       // Ignore errors during disconnect
