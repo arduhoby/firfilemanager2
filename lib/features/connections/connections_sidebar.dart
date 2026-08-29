@@ -61,6 +61,8 @@ class _ConnectionsSidebarState extends ConsumerState<ConnectionsSidebar>
     with SingleTickerProviderStateMixin {
   final _connectingIds = <String>{};
   bool _isScanning = false;
+  bool _networkExpanded = true;
+  bool _savedExpanded = true;
   bool _discoveredExpanded = true;
   late AnimationController _animController;
   late Animation<double> _widthAnim;
@@ -293,170 +295,142 @@ class _ConnectionsSidebarState extends ConsumerState<ConnectionsSidebar>
           ),
         ),
         SliverToBoxAdapter(child: _Divider()),
-        // Network Scan
-        SliverToBoxAdapter(
-          child: _SidebarTile(
-            icon: Icons.wifi_find_outlined,
-            name: 'Network Devices',
-            subtitle: _isScanning ? 'Scanning...' : 'Browse LAN',
-            color: Colors.blueAccent,
-            isConnecting: _isScanning,
-            collapsed: collapsed,
-            onTap: _isScanning ? () {} : () => _scanNetwork(context),
-          ),
-        ),
-        SliverToBoxAdapter(child: _Divider()),
-        // Section label
-        if (!collapsed && connections.isNotEmpty)
+        if (collapsed)
           SliverToBoxAdapter(
-            child: Padding(
-              padding: const EdgeInsets.fromLTRB(14, 10, 14, 2),
-              child: Text(
-                'SAVED',
-                style: theme.textTheme.labelSmall?.copyWith(
-                  color: theme.colorScheme.onSurfaceVariant.withValues(
-                    alpha: 0.6,
-                  ),
-                  fontWeight: FontWeight.w700,
-                  letterSpacing: 0.8,
-                  fontSize: 10,
-                ),
+            child: _SidebarTile(
+              icon: Icons.account_tree_outlined,
+              name: 'Network Tree',
+              subtitle: 'Ağ bağlantıları',
+              color: Colors.blueAccent,
+              collapsed: true,
+              onTap: _isScanning ? () {} : () => _scanNetwork(context),
+            ),
+          )
+        else ...[
+          SliverToBoxAdapter(
+            child: _TreeBranchTile(
+              icon: Icons.account_tree_outlined,
+              label: 'Network',
+              count: connections.length + discoveredServices.length,
+              expanded: _networkExpanded,
+              depth: 0,
+              trailing: IconButton(
+                tooltip: 'Ağı Tara',
+                icon: _isScanning
+                    ? const SizedBox(
+                        width: 15,
+                        height: 15,
+                        child: CircularProgressIndicator(strokeWidth: 2),
+                      )
+                    : const Icon(Icons.refresh_rounded, size: 17),
+                onPressed: _isScanning ? null : () => _scanNetwork(context),
               ),
+              onTap: () => setState(() => _networkExpanded = !_networkExpanded),
             ),
           ),
-        // Empty state
-        if (connections.isEmpty &&
-            !_isScanning &&
-            discoveredServices.isEmpty &&
-            !collapsed)
-          SliverToBoxAdapter(
-            child: Padding(
-              padding: const EdgeInsets.all(16),
-              child: Column(
-                children: [
-                  const SizedBox(height: 16),
-                  Icon(
-                    Icons.cloud_off,
-                    size: 28,
-                    color: theme.colorScheme.onSurfaceVariant.withValues(
-                      alpha: 0.4,
+          if (_networkExpanded) ...[
+            SliverToBoxAdapter(
+              child: _TreeBranchTile(
+                icon: Icons.bookmarks_outlined,
+                label: 'Kayıtlı Bağlantılar',
+                count: connections.length,
+                expanded: _savedExpanded,
+                depth: 1,
+                onTap: () => setState(() => _savedExpanded = !_savedExpanded),
+              ),
+            ),
+            if (_savedExpanded)
+              SliverList(
+                delegate: SliverChildBuilderDelegate((context, index) {
+                  final profile = connections[index];
+                  final isConnected =
+                      registry[profile.id]?.isConnected ?? false;
+                  final isConnecting = _connectingIds.contains(profile.id);
+                  return Padding(
+                    padding: const EdgeInsets.only(left: 24),
+                    child: _SidebarTile(
+                      icon: _getIconForType(profile.type),
+                      name: profile.name,
+                      subtitle: profile.host == null
+                          ? profile.type.name.toUpperCase()
+                          : '${profile.host}:${profile.effectivePort}',
+                      color: _getColorForType(profile.type, theme),
+                      isConnected: isConnected,
+                      isConnecting: isConnecting,
+                      collapsed: false,
+                      onTap: () => _connect(context, profile),
+                      onDisconnect: isConnected
+                          ? () async {
+                              await ref
+                                  .read(
+                                    storageProviderRegistryProvider.notifier,
+                                  )
+                                  .unregister(profile.id);
+                              if (mounted) setState(() {});
+                            }
+                          : null,
+                      onContextMenu: () =>
+                          _showSidebarConnectionMenu(context, profile),
+                      onEdit: () => _showEditDialog(context, profile),
+                      onDelete: () => _deleteConnection(context, profile),
+                    ),
+                  );
+                }, childCount: connections.length),
+              ),
+            if (_savedExpanded && connections.isEmpty)
+              SliverToBoxAdapter(
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(44, 6, 12, 8),
+                  child: OutlinedButton.icon(
+                    onPressed: () => _showAddDialog(context),
+                    icon: const Icon(Icons.add, size: 15),
+                    label: Text(l10n.connectionAddNew),
+                  ),
+                ),
+              ),
+            SliverToBoxAdapter(
+              child: _TreeBranchTile(
+                icon: Icons.radar_rounded,
+                label: 'Ağda Bulunanlar',
+                count: discoveredServices.length,
+                expanded: _discoveredExpanded,
+                depth: 1,
+                onTap: () =>
+                    setState(() => _discoveredExpanded = !_discoveredExpanded),
+              ),
+            ),
+            if (_discoveredExpanded)
+              SliverList(
+                delegate: SliverChildBuilderDelegate(
+                  (ctx, i) => Padding(
+                    padding: const EdgeInsets.only(left: 28),
+                    child: _DiscoveredTile(
+                      service: discoveredServices[i],
+                      onTap: () => _addDiscoveredAsConnection(
+                        context,
+                        discoveredServices[i],
+                      ),
                     ),
                   ),
-                  const SizedBox(height: 8),
-                  Text(
-                    'No connections yet',
+                  childCount: discoveredServices.length,
+                ),
+              ),
+            if (_discoveredExpanded &&
+                discoveredServices.isEmpty &&
+                !_isScanning)
+              SliverToBoxAdapter(
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(44, 4, 12, 10),
+                  child: Text(
+                    'Tarama yaparak FTP, SFTP, WebDAV ve SMB servislerini bul.',
                     style: theme.textTheme.bodySmall?.copyWith(
                       color: theme.colorScheme.onSurfaceVariant,
                     ),
                   ),
-                  const SizedBox(height: 12),
-                  FilledButton.icon(
-                    onPressed: () => _showAddDialog(context),
-                    icon: const Icon(Icons.add, size: 14),
-                    label: Text(
-                      l10n.connectionAddNew,
-                      style: const TextStyle(fontSize: 12),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-        // Saved connections
-        SliverList(
-          delegate: SliverChildBuilderDelegate((context, index) {
-            final profile = connections[index];
-            final isConnected = registry[profile.id]?.isConnected ?? false;
-            final isConnecting = _connectingIds.contains(profile.id);
-            return _SidebarTile(
-              icon: _getIconForType(profile.type),
-              name: profile.name,
-              subtitle: '${profile.host ?? ""}:${profile.effectivePort}',
-              color: _getColorForType(profile.type, theme),
-              isConnected: isConnected,
-              isConnecting: isConnecting,
-              collapsed: collapsed,
-              onTap: () => _connect(context, profile),
-              onDisconnect: isConnected
-                  ? () async {
-                      await ref
-                          .read(storageProviderRegistryProvider.notifier)
-                          .unregister(profile.id);
-                      if (mounted) setState(() {});
-                    }
-                  : null,
-              onContextMenu: () => _showSidebarConnectionMenu(context, profile),
-              onEdit: () => _showEditDialog(context, profile),
-              onDelete: () => _deleteConnection(context, profile),
-            );
-          }, childCount: connections.length),
-        ),
-        // Discovered
-        if (discoveredServices.isNotEmpty && !collapsed) ...[
-          SliverToBoxAdapter(
-            child: InkWell(
-              onTap: () =>
-                  setState(() => _discoveredExpanded = !_discoveredExpanded),
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(14, 10, 14, 2),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: Text(
-                        'DISCOVERED',
-                        style: theme.textTheme.labelSmall?.copyWith(
-                          color: theme.colorScheme.onSurfaceVariant.withValues(
-                            alpha: 0.6,
-                          ),
-                          fontWeight: FontWeight.w700,
-                          letterSpacing: 0.8,
-                          fontSize: 10,
-                        ),
-                      ),
-                    ),
-                    Icon(
-                      _discoveredExpanded
-                          ? Icons.keyboard_arrow_up
-                          : Icons.keyboard_arrow_down,
-                      size: 14,
-                      color: theme.colorScheme.onSurfaceVariant.withValues(
-                        alpha: 0.6,
-                      ),
-                    ),
-                  ],
                 ),
               ),
-            ),
-          ),
-          if (_discoveredExpanded)
-            SliverList(
-              delegate: SliverChildBuilderDelegate(
-                (ctx, i) => _DiscoveredTile(
-                  service: discoveredServices[i],
-                  onTap: () => _addDiscoveredAsConnection(
-                    context,
-                    discoveredServices[i],
-                  ),
-                ),
-                childCount: discoveredServices.length,
-              ),
-            ),
+          ],
         ],
-        if (_isScanning)
-          const SliverToBoxAdapter(
-            child: Padding(
-              padding: EdgeInsets.all(16),
-              child: Center(
-                child: Column(
-                  children: [
-                    CircularProgressIndicator(strokeWidth: 2),
-                    SizedBox(height: 8),
-                    Text('Scanning…', style: TextStyle(fontSize: 12)),
-                  ],
-                ),
-              ),
-            ),
-          ),
       ],
     );
   }
@@ -1023,6 +997,66 @@ class _Divider extends StatelessWidget {
       height: 0.5,
       margin: const EdgeInsets.symmetric(horizontal: 8),
       color: isDark ? const Color(0x22FFFFFF) : const Color(0x18000000),
+    );
+  }
+}
+
+class _TreeBranchTile extends StatelessWidget {
+  const _TreeBranchTile({
+    required this.icon,
+    required this.label,
+    required this.count,
+    required this.expanded,
+    required this.depth,
+    required this.onTap,
+    this.trailing,
+  });
+
+  final IconData icon;
+  final String label;
+  final int count;
+  final bool expanded;
+  final int depth;
+  final VoidCallback onTap;
+  final Widget? trailing;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    return InkWell(
+      onTap: onTap,
+      child: Container(
+        height: 38,
+        padding: EdgeInsets.only(left: 8 + depth * 16, right: 5),
+        child: Row(
+          children: [
+            Icon(
+              expanded ? Icons.keyboard_arrow_down : Icons.chevron_right,
+              size: 17,
+              color: theme.colorScheme.onSurfaceVariant,
+            ),
+            Icon(icon, size: 17, color: theme.colorScheme.primary),
+            const SizedBox(width: 7),
+            Expanded(
+              child: Text(
+                label,
+                style: theme.textTheme.bodySmall?.copyWith(
+                  fontWeight: depth == 0 ? FontWeight.w700 : FontWeight.w600,
+                ),
+              ),
+            ),
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 1),
+              decoration: BoxDecoration(
+                color: theme.colorScheme.surfaceContainerHighest,
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: Text('$count', style: theme.textTheme.labelSmall),
+            ),
+            if (trailing != null) trailing!,
+          ],
+        ),
+      ),
     );
   }
 }
