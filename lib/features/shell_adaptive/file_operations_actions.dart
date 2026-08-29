@@ -7,6 +7,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 import '../../l10n/generated/app_localizations.dart' as gen;
 import '../../core/storage/models/file_entry.dart';
 import '../../core/storage/storage_provider.dart';
+import '../../core/platform/native_file_info_service.dart';
 import '../../core/storage/storage_provider_service.dart';
 import '../file_operations/archive_service.dart';
 import '../file_operations/file_open_service.dart';
@@ -575,6 +576,8 @@ class FileOperationsActions extends _$FileOperationsActions {
     FileEntry entry,
   ) async {
     final l10n = gen.AppLocalizations.of(context)!;
+
+    if (await NativeFileInfoService.show(entry.path)) return;
 
     await showDialog<void>(
       context: context,

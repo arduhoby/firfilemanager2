@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
@@ -376,6 +377,15 @@ class _ConnectionsSidebarState extends ConsumerState<ConnectionsSidebar>
               isConnecting: isConnecting,
               collapsed: collapsed,
               onTap: () => _connect(context, profile),
+              onDisconnect: isConnected
+                  ? () async {
+                      await ref
+                          .read(storageProviderRegistryProvider.notifier)
+                          .unregister(profile.id);
+                      if (mounted) setState(() {});
+                    }
+                  : null,
+              onContextMenu: () => _showSidebarConnectionMenu(context, profile),
               onEdit: () => _showEditDialog(context, profile),
               onDelete: () => _deleteConnection(context, profile),
             );
@@ -603,6 +613,108 @@ class _ConnectionsSidebarState extends ConsumerState<ConnectionsSidebar>
     }
   }
 
+  void _showSidebarConnectionMenu(
+    BuildContext context,
+    ConnectionProfile profile,
+  ) {
+    final connected =
+        ref.read(storageProviderRegistryProvider)[profile.id]?.isConnected ??
+        false;
+    unawaited(
+      showMenu<String>(
+        context: context,
+        position: const RelativeRect.fromLTRB(220, 140, 0, 0),
+        items: [
+          PopupMenuItem(
+            value: connected ? 'disconnect' : 'connect',
+            child: Row(
+              children: [
+                Icon(connected ? Icons.link_off : Icons.link, size: 16),
+                const SizedBox(width: 8),
+                Text(connected ? 'Unmount / Bağlantıyı Kes' : 'Bağlan'),
+              ],
+            ),
+          ),
+          const PopupMenuItem(
+            value: 'properties',
+            child: Row(
+              children: [
+                Icon(Icons.info_outline, size: 16),
+                SizedBox(width: 8),
+                Text('Özellikler'),
+              ],
+            ),
+          ),
+          const PopupMenuItem(
+            value: 'edit',
+            child: Row(
+              children: [
+                Icon(Icons.edit, size: 16),
+                SizedBox(width: 8),
+                Text('Düzenle'),
+              ],
+            ),
+          ),
+        ],
+      ).then((value) {
+        if (!context.mounted || value == null) return;
+        switch (value) {
+          case 'connect':
+            _connect(context, profile);
+          case 'disconnect':
+            ref
+                .read(storageProviderRegistryProvider.notifier)
+                .unregister(profile.id);
+          case 'edit':
+            _showEditDialog(context, profile);
+          case 'properties':
+            _showConnectionProperties(context, profile);
+        }
+      }),
+    );
+  }
+
+  Future<void> _showConnectionProperties(
+    BuildContext context,
+    ConnectionProfile profile,
+  ) async {
+    await showDialog<void>(
+      context: context,
+      builder: (_) => AlertDialog(
+        title: Text(profile.name),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            _propertyRow('Tür', profile.type.name.toUpperCase()),
+            if (profile.host != null) _propertyRow('Sunucu', profile.host!),
+            if (profile.host != null)
+              _propertyRow('Port', '${profile.effectivePort}'),
+            if (profile.username != null)
+              _propertyRow('Kullanıcı', profile.username!),
+            _propertyRow('Varsayılan yol', profile.defaultPath),
+          ],
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text('Kapat'),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _propertyRow(String label, String value) => Padding(
+    padding: const EdgeInsets.symmetric(vertical: 4),
+    child: Row(
+      children: [
+        SizedBox(width: 100, child: Text(label)),
+        Expanded(child: Text(value)),
+      ],
+    ),
+  );
+
   void _addDiscoveredAsConnection(
     BuildContext context,
     DiscoveredService service,
@@ -670,6 +782,8 @@ class _SidebarTile extends StatefulWidget {
     required this.collapsed,
     this.isConnected = false,
     this.isConnecting = false,
+    this.onDisconnect,
+    this.onContextMenu,
     this.onEdit,
     this.onDelete,
   });
@@ -682,6 +796,8 @@ class _SidebarTile extends StatefulWidget {
   final bool collapsed;
   final bool isConnected;
   final bool isConnecting;
+  final VoidCallback? onDisconnect;
+  final VoidCallback? onContextMenu;
   final VoidCallback? onEdit;
   final VoidCallback? onDelete;
 
@@ -762,6 +878,9 @@ class _SidebarTileState extends State<_SidebarTile> {
         child: InkWell(
           borderRadius: BorderRadius.circular(8),
           onTap: widget.onTap,
+          onSecondaryTapDown: widget.onContextMenu == null
+              ? null
+              : (_) => widget.onContextMenu!.call(),
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 7),
             child: Row(
@@ -823,6 +942,14 @@ class _SidebarTileState extends State<_SidebarTile> {
                     ],
                   ),
                 ),
+                if (_hovered && widget.onDisconnect != null)
+                  IconButton(
+                    icon: const Icon(Icons.link_off, size: 15),
+                    tooltip: 'Bağlantıyı Kes / Unmount',
+                    visualDensity: VisualDensity.compact,
+                    padding: EdgeInsets.zero,
+                    onPressed: widget.onDisconnect,
+                  ),
                 if (widget.onEdit != null || widget.onDelete != null)
                   _TileMenu(onEdit: widget.onEdit, onDelete: widget.onDelete),
               ],
