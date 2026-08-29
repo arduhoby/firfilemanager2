@@ -1,10 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
-import 'dart:io';
 
 import 'package:googleapis/drive/v3.dart' as drive;
-import 'package:google_sign_in/google_sign_in.dart';
-import 'package:extension_google_sign_in_as_googleapis_auth/extension_google_sign_in_as_googleapis_auth.dart';
 import 'package:googleapis_auth/auth_io.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -19,18 +16,8 @@ class GoogleDriveProvider implements StorageProvider {
   final String? clientId;
   final String? clientSecret;
   drive.DriveApi? _api;
-  final GoogleSignIn _googleSignIn;
 
-  GoogleDriveProvider({required this.profile, this.clientId, this.clientSecret})
-    : _googleSignIn = GoogleSignIn(
-        scopes: [drive.DriveApi.driveScope],
-        // On Android, we don't need to specify clientId if it's registered in Cloud Console.
-        // On iOS, we would pass the iOS Client ID here.
-        // On Desktop/Web, we can pass the Web Client ID here.
-        clientId: Platform.isAndroid || Platform.isIOS
-            ? null
-            : (clientId ?? Env.googleDriveClientId),
-      );
+  GoogleDriveProvider({required this.profile, this.clientId, this.clientSecret});
 
   @override
   String get displayName => profile.name;
@@ -43,14 +30,22 @@ class GoogleDriveProvider implements StorageProvider {
 
   @override
   Future<void> connect() async {
+    final effectiveClientId = (clientId ?? Env.googleDriveClientId).trim();
+    if (!_isConfiguredValue(effectiveClientId) ||
+        !effectiveClientId.endsWith('.apps.googleusercontent.com')) {
+      throw StorageException(
+        'Google Drive OAuth yapılandırılmamış. Ayarlar > Bulut Servisleri '
+        'API Anahtarları bölümüne Google Cloud Console\'da "Desktop app" '
+        'türünde oluşturulan Client ID\'yi girin.',
+      );
+    }
+
+    final rawClientSecret = (clientSecret ?? Env.googleDriveClientSecret).trim();
+    final effectiveClientSecret = _isConfiguredValue(rawClientSecret)
+        ? rawClientSecret
+        : null;
+
     try {
-      final effectiveClientId = clientId ?? Env.googleDriveClientId;
-      final effectiveClientSecret = clientSecret ?? Env.googleDriveClientSecret;
-
-      if (effectiveClientId.isEmpty) {
-        throw Exception('Google Drive Client ID must be provided.');
-      }
-
       final id = ClientId(effectiveClientId, effectiveClientSecret);
       final scopes = [drive.DriveApi.driveScope];
 
@@ -67,6 +62,14 @@ class GoogleDriveProvider implements StorageProvider {
       print('Google Drive Connection Error: $e\n$st');
       throw StorageException('Failed to connect to Google Drive: $e');
     }
+  }
+
+  static bool _isConfiguredValue(String value) {
+    if (value.isEmpty) return false;
+    final normalized = value.toUpperCase();
+    return !normalized.startsWith('YOUR_') &&
+        !normalized.contains('PLACEHOLDER') &&
+        !normalized.contains('TODO');
   }
 
   @override
